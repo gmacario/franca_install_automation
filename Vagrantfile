@@ -5,22 +5,28 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-   config.vm.box = "precise64"
-
    config.vm.hostname = "francalab-precise64"
 
+   # Precise64 box from Hashicorp (the company behind Vagrant)
+   config.vm.box = "hashicorp/precise64"
+
+   # Precise64 box from Ubuntu cloud images
+   #config.vm.box = "ubuntu/precise64"
    # If above box does not exist locally, fetch it here:
-   config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+   #config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
 
    # To run eclipse we need more than default RAM 512MB And we might as well
    # set a useful name also, which I prefer to have equal to the hostname that
    # was defined above, but to make it unique a timestamp is added also.
    # Increase video RAM as well, it doesn't cost much and we will run
    # graphical desktops after all.
-   vmname = config.vm.hostname + "-" + `date +%Y%m%d%H%M`.to_s
-   vmname.chomp!      # Without this there is a newline character in the name :-o
+   #vmname = config.vm.hostname + "-" + `date +%Y%m%d%H%M`.to_s
+   #vmname.chomp!      # Without this there is a newline character in the name :-o
    config.vm.provider :virtualbox do |vb|
-      vb.customize [ "modifyvm", :id, "--name", vmname ]
+      # Don't boot with headless mode
+      vb.gui = true
+
+      #vb.customize [ "modifyvm", :id, "--name", vmname ]
       vb.customize [ "modifyvm", :id, "--memory", "1536" ]
       vb.customize [ "modifyvm", :id, "--vram", "128" ]
    end
@@ -44,7 +50,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
    # Install prerequisites
    config.vm.provision :shell, inline:
-      'sudo apt-get update; sudo apt-get install -y wget unzip openjdk-6-jre'
+      'sudo apt-get update; sudo apt-get install -y curl wget unzip openjdk-6-jre'
 
    # Run the eclipse + franca installer script
    config.vm.provision :shell, :path => "script.sh"
@@ -70,8 +76,17 @@ chmod 755 $shortcut
 # Fix that:
 sudo chown -R vagrant:vagrant /home/vagrant
 
-# Remove other users than vagrant -- makes things less confusing
-sudo deluser ubuntu
+# Remove other users than vagrant -- makes things less confusing when logging in
+# Notice that some Vagrant boxes (most notably hashicorp/precise64)
+# do not have those extra users defined
+USERS_TO_DISABLE="ubuntu"
+for user in $USERS_TO_DISABLE; do
+    if id $user &>/dev/null; then
+		echo Disabling user $user
+        #sudo deluser $user
+		sudo usermod -L -e 1 $user
+    fi
+done
       '
 
    # Warning, again
