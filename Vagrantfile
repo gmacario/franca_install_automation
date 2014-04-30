@@ -27,11 +27,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
    config.vm.provision :shell, inline:
       '# Quick fix to enable vbguest on VirtualBox 4.3.10
-      # See https://github.com/mitchellh/vagrant/issues/3341
-      if [ ! -e /usr/lib/VBoxGuestAdditions ]; then
+       # See https://github.com/mitchellh/vagrant/issues/3341
+       if [ ! -e /usr/lib/VBoxGuestAdditions ]; then
           sudo ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions \
 	      /usr/lib/VBoxGuestAdditions || true
-      fi'
+       fi'
 
    # Warning to user
    config.vm.provision :shell, inline:
