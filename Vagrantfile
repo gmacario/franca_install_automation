@@ -111,7 +111,12 @@ done
 
    # Install graphical environment
    config.vm.provision :shell, inline:
-   'sudo apt-get install -y lxde'
+   'sudo apt-get install -y lxde
+
+    # Workaround for debconf database corruption
+    # See http://forums.debian.net/viewtopic.php?f=10&t=101659
+    sudo /usr/share/debconf/fix_db.pl
+   '
 
    # ----------------------------------------------
    # If VM will run some network services e.g. web browser
