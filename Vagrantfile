@@ -7,8 +7,12 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    config.vm.hostname = "francalab-precise64"
 
+   # Precise32 box from Hashicorp (the company behind Vagrant)
+   config.vm.box = "hashicorp/precise32"
+   config.vm.box_url = "https://vagrantcloud.com/hashicorp/precise32/version/1/provider/virtualbox.box"
+
    # Precise64 box from Hashicorp (the company behind Vagrant)
-   config.vm.box = "hashicorp/precise64"
+   #config.vm.box = "hashicorp/precise64"
 
    # Precise64 box from Ubuntu cloud images
    #config.vm.box = "ubuntu/precise64"
