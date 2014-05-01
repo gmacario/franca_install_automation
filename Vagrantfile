@@ -120,11 +120,11 @@ done
 
    # Install graphical environment
    config.vm.provision :shell, inline:
-   'sudo apt-get install -y lxde || true
+   'apt-get install -y lxde || true
 
     # Workaround for debconf database corruption
     # See http://forums.debian.net/viewtopic.php?f=10&t=101659
-    sudo /usr/share/debconf/fix_db.pl
+    /usr/share/debconf/fix_db.pl
    '
 
    # ----------------------------------------------
