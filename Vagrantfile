@@ -5,20 +5,25 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-   config.vm.hostname = "francalab-precise64"
-
    # Precise32 box from Hashicorp (the company behind Vagrant)
-   config.vm.box = "hashicorp/precise32"
-   config.vm.box_url = "https://vagrantcloud.com/hashicorp/precise32/version/1/provider/virtualbox.box"
+   #config.vm.box = "hashicorp/precise32"
+   #config.vm.box_url = "https://vagrantcloud.com/hashicorp/precise32/version/1/provider/virtualbox.box"
+   #config.vm.hostname = "francalab-precise32"
 
    # Precise64 box from Hashicorp (the company behind Vagrant)
    #config.vm.box = "hashicorp/precise64"
    #config.vm.box_url = "https://vagrantcloud.com/hashicorp/precise64/version/1/provider/virtualbox.box"
+   #config.vm.hostname = "francalab-precise64"
 
    # Precise64 box from Ubuntu cloud images
    #config.vm.box = "ubuntu/precise64"
-   # If above box does not exist locally, fetch it here:
    #config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+   #config.vm.hostname = "francalab-precise64"
+
+   # Trusty32 box from Ubuntu cloud images
+   config.vm.box = "ubuntu/trusty32"
+   config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box"
+   config.vm.hostname = "francalab-trusty32"
 
    # To run eclipse we need more than default RAM 512MB And we might as well
    # set a useful name also, which I prefer to have equal to the hostname that
