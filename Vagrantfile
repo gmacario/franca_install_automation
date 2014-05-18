@@ -72,8 +72,16 @@ chmod 755 $shortcut
 # Fix that:
 sudo chown -R vagrant:vagrant /home/vagrant
 
-# Remove other users than vagrant -- makes things less confusing
-sudo deluser ubuntu
+# Remove other users than vagrant -- makes things less confusing when logging in
+# Notice that some Vagrant boxes (most notably hashicorp/precise64)
+# do not have those extra users defined
+USERS_TO_DISABLE="ubuntu"
+for user in $USERS_TO_DISABLE; do
+    if id $user &>/dev/null; then
+        echo Disabling user $user
+        sudo deluser $user
+    fi
+done
       '
 
    config.vm.provision :shell, inline:
