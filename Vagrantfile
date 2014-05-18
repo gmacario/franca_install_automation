@@ -85,7 +85,12 @@ true                  # Make sure Vagrant does not stop on error
 
    # Install graphical environment
    config.vm.provision :shell, inline:
-   'sudo apt-get install -y lxde
+   'apt-get install -y lxde || true
+
+    # Workaround for debconf database corruption
+    # See http://forums.debian.net/viewtopic.php?f=10&t=101659
+    sudo /usr/share/debconf/fix_db.pl
+   '
 
     echo "***************************************************************"
     echo "Reminder:"
@@ -99,15 +104,7 @@ true                  # Make sure Vagrant does not stop on error
     echo ""
     echo "Then run eclipse, probably at: ~vagrant/tools/autoeclipse/eclipse"
     echo "Read the project README!"
-    echo "***************************************************************"'
-
-   # Install graphical environment
-   config.vm.provision :shell, inline:
-   'apt-get install -y lxde || true
-
-    # Workaround for debconf database corruption
-    # See http://forums.debian.net/viewtopic.php?f=10&t=101659
-    sudo /usr/share/debconf/fix_db.pl
+    echo "***************************************************************"
    '
 
    # ----------------------------------------------
