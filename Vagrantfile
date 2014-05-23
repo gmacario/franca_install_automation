@@ -90,7 +90,6 @@ true                  # Make sure Vagrant does not stop on error
     # Workaround for debconf database corruption
     # See http://forums.debian.net/viewtopic.php?f=10&t=101659
     sudo /usr/share/debconf/fix_db.pl
-   '
 
     echo "***************************************************************"
     echo "Reminder:"
