@@ -95,8 +95,10 @@ Instructions for Virtual Machine creation
    ```
    Alternatively, download and install files from http://www.virtualbox.org/
 
-3. Run `vagrant up`: 
-
+3. From inside the project directory, run `vagrant up` in order to create and start the VM: 
+   ```bash
+   $ vagrant up
+   ```
    NOTE: I ran into a new bug where a new machine claims to be provisioned already
    (it can't be...) but for that reason we give the explicit `--provision` flag.
    It works.
