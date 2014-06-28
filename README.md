@@ -87,7 +87,7 @@ Instructions for Virtual Machine creation
    ```bash
    $ sudo yum install vagrant
    ```
-   Alternatively, download and install files from http://www.vagrantup.com/
+   Alternatively, download and install files from http://www.vagrantup.com/ for all the Operating Systems supported by Vagrant
 
 2. Install VirtualBox. For example (for Debian or Ubuntu): 
    ```bash
@@ -99,47 +99,56 @@ Instructions for Virtual Machine creation
    ```bash
    $ vagrant up
    ```
-   NOTE: I ran into a new bug where a new machine claims to be provisioned already
-   (it can't be...) but for that reason we give the explicit `--provision` flag.
-   It works.
-   ```bash
-   $ vagrant up --provision
-   ```
-
+   
    The first time it will download the base VM "box" which
    is currently an Ubuntu system.
-
+   
    Feel free to replace it with another box of another distro, but the
    provisioning using apt-get may need changes then.  Pull requests
    welcome.
-
-   NOTE: There will be some errors towards the end of the provisioning which
-   seems to be due to vagrant provisioning not running in a normal interactive
-   shell?
-
-   You can ignore those errors.  Of course you may have some other error that I
-   have not seen yet, but using vagrant and a known base box this should be
-   quite foolproof.
-
-4. Stop the VM which is now running headless:
-
+   
+   **NOTE**: Ubuntu has currently a bug which aborts the installation of packages which is performed during the initial provisioning:
+    ```
+    ...
+    ==> default: Processing triggers for libgdk-pixbuf2.0-0 ...
+    ==> default: Processing triggers for menu ...
+==> default: Errors were encountered while processing:
+==> default:  dictionaries-common
+==> default:  miscfiles
+==> default: E
+==> default: : 
+==> default: Sub-process /usr/bin/dpkg returned an error code (1)
+==> default: ***************************************************************
+==> default: Reminder:
+==> default: You will see errors in dpkg-preconfigure and similar ones.
+==> default: They seem to be because Vagrant is not running in an interactive
+==> default: terminal.  So you can ignore them and try the VM.
+==> default: ***************************************************************
+==> default: 
+==> default: When provisioning is done, halt the VM, then boot normally 
+==> default: with a GUI inside Virtualbox, i.e. not using vagrant...
+==> default: 
+==> default: Then run eclipse, probably at: ~vagrant/tools/autoeclipse/eclipse
+==> default: Read the project README!
+==> default: ***************************************************************
+MacBook-Pro-17:franca_install_automation gmacario$
+```
+   If you happen to be hit by this bug, as a workaround reload the VM and add the explicit `--provision` flag.
    ```bash
-    $ vagrant halt
+   $ vagrant reload --provision
    ```
-
-5. Locate your VM in VirtualBox GUI and boot it normally (i.e. not headless)
-
-   You should soon see an LXDE graphical shell asking you to select user.
-
+   
+4. You should soon see an LXDE graphical shell asking you to select user.
+   
    Login as `vagrant`, password `vagrant`
-
-6. Enjoy testing Franca environment!
-
+   
+5. Enjoy testing Franca environment!
+   
    Use the default workspace directory at `/home/vagrant/workspace`.
    Just hit OK.
-
-7. To run Franca examples you must manually import them into the workspace.
-
+   
+6. To run Franca examples you must manually import them into the workspace.
+   
    The instructions can be found towards the end of `script.sh`.
 
 
@@ -154,7 +163,7 @@ Tweaking settings
 Sharing files
 -------------
 
-NOTE: In a Vagrant box you can share files through the /vagrant directory:
+**NOTE**: In a Vagrant box you can share files through the `/vagrant` directory:
 
 * On host: It is this directory, where you have Vagrantfile and this README.
 * On Virtual Machine: Mounted at /vagrant
