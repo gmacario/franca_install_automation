@@ -110,8 +110,10 @@ Instructions for Virtual Machine creation
    **NOTE**: Ubuntu has currently a bug which aborts the installation of packages which is performed during the initial provisioning:
     ```
     ...
-    ==> default: Processing triggers for libgdk-pixbuf2.0-0 ...
-    ==> default: Processing triggers for menu ...
+==> default: Processing triggers for libc-bin ...
+==> default: ldconfig deferred processing now taking place
+==> default: Processing triggers for libgdk-pixbuf2.0-0 ...
+==> default: Processing triggers for menu ...
 ==> default: Errors were encountered while processing:
 ==> default:  dictionaries-common
 ==> default:  miscfiles
@@ -120,14 +122,13 @@ Instructions for Virtual Machine creation
 ==> default: Sub-process /usr/bin/dpkg returned an error code (1)
 ==> default: ***************************************************************
 ==> default: Reminder:
-==> default: You will see errors in dpkg-preconfigure and similar ones.
-==> default: They seem to be because Vagrant is not running in an interactive
-==> default: terminal.  So you can ignore them and try the VM.
+==> default: You may see errors in dpkg-preconfigure and similar ones.
+==> default: If you happen to be hit by this bug, as a workaround
+==> default: reload the VM and add the explicit --provision flag.
+==> default: $ vagrant reload --provision
 ==> default: ***************************************************************
-==> default: 
 ==> default: When provisioning is done, halt the VM, then boot normally 
 ==> default: with a GUI inside Virtualbox, i.e. not using vagrant...
-==> default: 
 ==> default: Then run eclipse, probably at: ~vagrant/tools/autoeclipse/eclipse
 ==> default: Read the project README!
 ==> default: ***************************************************************
