@@ -93,11 +93,13 @@ true                  # Make sure Vagrant does not stop on error
 
     echo "***************************************************************"
     echo "Reminder:"
-    echo "You will see errors in dpkg-preconfigure and similar ones."
-    echo "They seem to be because Vagrant is not running in an interactive"
-    echo "terminal.  So you can ignore them and try the VM."
+    echo "You may see errors in dpkg-preconfigure and similar ones."
+    echo "If you happen to be hit by this bug, as a workaround"
+    echo "reload the VM and add the explicit --provision flag."
+    echo ""
+    echo "$ vagrant reload --provision"
     echo "***************************************************************"
-    echo
+    echo ""
     echo "When provisioning is done, halt the VM, then boot normally "
     echo "with a GUI inside Virtualbox, i.e. not using vagrant..."
     echo ""
