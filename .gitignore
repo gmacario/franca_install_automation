@@ -2,3 +2,4 @@
 *.swo
 .vagrant/
 downloads/
+VMNAME
