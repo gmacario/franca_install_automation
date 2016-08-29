@@ -61,6 +61,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.customize [ "modifyvm", :id, "--vram", "128" ]
    end
 
+   STDERR.puts 'DEBUG: vmname=' + vmname
+
    # Export the VM name (need to know the name of the artifact when creating automated build)
    ENV['VMNAME'] = vmname
    config.vm.provision :shell, inline:
