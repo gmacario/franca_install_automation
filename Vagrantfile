@@ -127,6 +127,10 @@ true                  # Make sure Vagrant does not stop on error
    config.vm.provision :shell, inline:
    'sudo apt-get install -y lxde
 
+    # Workaround for debconf database corruption
+    # See http://forums.debian.net/viewtopic.php?f=10&t=101659
+    sudo /usr/share/debconf/fix_db.pl
+
     echo "***************************************************************"
     echo "Reminder:"
     echo "You will see errors in dpkg-preconfigure and similar ones."
